@@ -39,15 +39,20 @@ with open('./day2/input.txt', 'r') as file:
   filedata = file.read()
 
 games = parseGames(filedata)
-idSum = 0
+powerSum = 0
 for game in games:
-  valid = True
+  maxRed = 0
+  maxBlue = 0
+  maxGreen = 0
   for round in game["rounds"]:
-     if round["red"] > numRed or round["blue"] > numBlue or round["green"] > numGreen:
-      valid = False
-      break
-  if valid:
-     idSum+=game["id"]
+     if round["red"] > maxRed:
+      maxRed = round["red"]
+     if round["blue"] > maxBlue:
+      maxBlue = round["blue"]
+     if round["green"] > maxGreen:
+      maxGreen = round["green"]
+  powerSum+=maxRed*maxBlue*maxGreen
+
 
    
-print(idSum)
+print(powerSum)
