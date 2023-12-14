@@ -32,23 +32,26 @@ for src in maps['graph']:
     if src[-1] == 'A':
         currents.append(src)
 
-currents = currents[:1]
-current = 'AAA'
+current = currents[2]
+# visits = {}
 visits = {current:[[0,0]]}
-repeat = False
+repeats = 0
 step = 0
 numSteps = len(maps['steps'])
-while not repeat:
+# while repeats<20:
+while True:
     localStep = step % numSteps
     move = maps['steps'][localStep]
     if move == 'R':
         current = maps['graph'][current][1]
     else:
         current = maps['graph'][current][0]
+    step+=1
+    localStep = step % numSteps
     if current in visits:
         for visit in visits[current]:
             if visit[0] == localStep:
-                repeat = True
+                repeats += 1
                 print(f'repeat found! {current}')
                 print(f'First local step: {visit[0]} global step: {visit[1]}')
                 print(f'Second local step: {localStep} global step: {step}')
